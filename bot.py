@@ -4,10 +4,8 @@ from datetime import datetime, date
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw 
-
-
-
-
+from apscheduler.schedulers.blocking import BlockingScheduler
+sched = BlockingScheduler()
 
 #enter the corresponding information from your Twitter application:
 CONSUMER_KEY = keys["CONSUMER_KEY"]
@@ -18,10 +16,9 @@ auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
 api = tweepy.API(auth)
 
-def lambda_handler():
-	api.update_with_media("jio_output.jpg", status= "@JioCare I'm done with this... https://github.com/jithurjacob/JioTwitterBot")# for AWS lamda scheduler
-	print("done")
-while True:
+
+@sched.scheduled_job('interval', minutes=30)
+def timed_job():
 	font = ImageFont.truetype("Aaargh.ttf",40) #https://www.fontsquirrel.com/fonts/download/Aaargh
 	jio_date = datetime.strptime("2-10-2016 14:00","%d-%m-%Y %H:%M")
 	time_diff = (datetime.now() - jio_date ).total_seconds()
@@ -41,5 +38,6 @@ while True:
 	img.save("jio_output.jpg")#api.update_status("")
 	api.update_with_media("jio_output.jpg", status= "@JioCare I'm done with this... https://github.com/jithurjacob/JioTwitterBot")
 	print("Tweeted now ",datetime.now().strftime("%d-%m-%Y %H:%M"))
-	time.sleep(900)#Tweet every 15 minutes
+	#time.sleep(900)#Tweet every 15 minutes
+sched.start()
 

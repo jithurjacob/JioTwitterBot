@@ -138,6 +138,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 keys.py
+six.py
 examples/
 oauthlib/
 oauthlib-2.0.0.dist-info/
