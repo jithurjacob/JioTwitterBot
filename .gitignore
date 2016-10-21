@@ -138,3 +138,15 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 keys.py
+examples/
+oauthlib/
+oauthlib-2.0.0.dist-info/
+PIL/
+Pillow-3.1.0-py2.7.egg-info/
+requests/
+requests_oauthlib/
+requests_oauthlib-0.7.0.dist-info/
+requests-2.11.1.dist-info/
+six-1.10.0.dist-info/
+tweepy/
+tweepy-3.5.0.dist-info/
